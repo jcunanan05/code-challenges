@@ -1,19 +1,24 @@
 function diffArray(arr1, arr2) {
-  var newArr = [];
+  var sameElements = [];
   // return element that doesn't exist in both arrays
+  //compare 2 arrays
+  arr1.forEach(element1 => {
+    var sameElement = arr2.filter(element2 => {
+      return element1 == element2;
+    });
 
-  for(var i = 0; i < arr1.length; i++) {
-    //scan through
-    var el1 = arr1[i];
+    if (sameElement[0]) sameElements.push(sameElement[0]);
+  });
 
-    for(var j = 0; j < arr2.length; j++) {
-      
-    }
-  }
-
-  return newArr;
+  //remove their same element
+  sameElements.forEach(sameElement => {
+    arr1.splice(arr1.indexOf(sameElement), 1);
+    arr2.splice(arr2.indexOf(sameElement), 1);
+  });
+  //compile into new array
+  return arr1.concat(arr2);
 }
 
-var result = diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+var result = diffArray(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
 
 console.log(result);
