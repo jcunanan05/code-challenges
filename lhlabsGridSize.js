@@ -1,5 +1,10 @@
 /*
-Write a function called gridSize() that will tell you the size of your grid in the format width x height. Your function should return a string, and in this example, your function should return the string "10 x 10". But you have to make sure that you figure that string out by actually measuring your grid!
+Challenge 2
+Awesome job! Other lighthouse operators are jealous of your grid, and your code skills. Just to show off, let's write a new function for the system which will count up how many cells total there are. Given the code you just wrote, this should be pretty easy.
+
+Write a new function called totalCells() which will return the total number of cells in your grid. For this grid, it should return 100, but again make sure that is a calculated value and not just a number you type in for your function to return. We want to make all the other lighthouse operators jealous.
+
+Don’t erase your past code when you work on the new challenge! Remember that the challenges are cumulative so you shouldn’t erase any of your work once you finish a challenge. You will need functions created on prior days to complete future challenges!
 */
 
 const GRID = [
@@ -20,4 +25,15 @@ function gridSize() {
   return GRID[0].length + " x " + GRID.length;
 }
 
-gridSize();
+function totalCells() {
+  var result = 0;
+
+  GRID.forEach(rows => {
+    result += rows.length;
+  });
+
+  return result;
+}
+
+
+console.log(totalCells());
