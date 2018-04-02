@@ -1,10 +1,8 @@
 /*
-Challenge 2
-Awesome job! Other lighthouse operators are jealous of your grid, and your code skills. Just to show off, let's write a new function for the system which will count up how many cells total there are. Given the code you just wrote, this should be pretty easy.
+Challenge 3
+Okay, let's get our lighthouse actually doing some work! As the lighthouse keeper, sometimes you'll need to shine the light directly on a particular cell in the grid, to alert passing ships to a danger there.
 
-Write a new function called totalCells() which will return the total number of cells in your grid. For this grid, it should return 100, but again make sure that is a calculated value and not just a number you type in for your function to return. We want to make all the other lighthouse operators jealous.
-
-Don’t erase your past code when you work on the new challenge! Remember that the challenges are cumulative so you shouldn’t erase any of your work once you finish a challenge. You will need functions created on prior days to complete future challenges!
+Your job is to write a function called lightCell() that takes in the coordinates in the form of 'A3' or 'J9' and returns the contents of that specific cell. (Ex: lightCell('B4'); would return "")
 */
 
 const GRID = [
@@ -36,4 +34,13 @@ function totalCells() {
 }
 
 
-console.log(totalCells());
+function lightCell(cell) {
+  //subtract 65 from ascii code to get xCoordinate
+  var x = cell.charCodeAt(0) - 65;
+  var y = Number(cell[1]) - 1;
+  console.log(`x: ${x}, charCode: ${cell.charCodeAt(0)} y: ${y}`);
+
+  return `${GRID[y][x]}`;
+}
+
+console.log(lightCell('D1'));
