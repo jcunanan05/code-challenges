@@ -1,8 +1,8 @@
 /*
-Challenge 3
-Okay, let's get our lighthouse actually doing some work! As the lighthouse keeper, sometimes you'll need to shine the light directly on a particular cell in the grid, to alert passing ships to a danger there.
+Challenge 4
+In the area where the lighthouse is watching, the grid, there are many rocks which ships would need to avoid. Rocks are indicated with the ^ symbol on the grid.
 
-Your job is to write a function called lightCell() that takes in the coordinates in the form of 'A3' or 'J9' and returns the contents of that specific cell. (Ex: lightCell('B4'); would return "")
+Write a function called isRock() which will take in a coordinate in the form of 'C7' and return a true or a false boolean value depending on whether there is a rock in that cell or not. (Example: isRock('D1'); would return true)
 */
 
 const GRID = [
@@ -43,4 +43,9 @@ function lightCell(cell) {
   return `${GRID[y][x]}`;
 }
 
-console.log(lightCell('D1'));
+
+function isRock(cell) {
+  return lightCell(cell) === '^';
+}
+
+console.log(isRock('D1'));
