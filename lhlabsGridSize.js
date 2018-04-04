@@ -48,4 +48,9 @@ function isRock(cell) {
   return lightCell(cell) === '^';
 }
 
+
+function isCurrent(cell) {
+  return lightCell(cell) === '~';
+}
+
 console.log(isRock('D1'));
