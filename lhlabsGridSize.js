@@ -1,8 +1,8 @@
 /*
-Challenge 4
-In the area where the lighthouse is watching, the grid, there are many rocks which ships would need to avoid. Rocks are indicated with the ^ symbol on the grid.
+Challenge 6
+Your next job is to write a loop so that your lighthouse can sweep a whole row of cells.
 
-Write a function called isRock() which will take in a coordinate in the form of 'C7' and return a true or a false boolean value depending on whether there is a rock in that cell or not. (Example: isRock('D1'); would return true)
+To do this, write a function named lightRow() that takes in the number of the row and returns the contents of the cell. (Example: lightRow(2); would return ["", "", "", "", "~", "", "", "", "", ""])
 */
 
 const GRID = [
@@ -53,4 +53,10 @@ function isCurrent(cell) {
   return lightCell(cell) === '~';
 }
 
-console.log(isRock('D1'));
+
+function lightRow(row) {
+  return GRID[row - 1];
+}
+
+
+console.log(lightRow(2));
