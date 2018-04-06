@@ -1,8 +1,8 @@
 /*
-Challenge 6
-Your next job is to write a loop so that your lighthouse can sweep a whole row of cells.
+Challenge 7
+Now that you can return the contents of the cells of a row, we also need to be able to return the cells of a column.
 
-To do this, write a function named lightRow() that takes in the number of the row and returns the contents of the cell. (Example: lightRow(2); would return ["", "", "", "", "~", "", "", "", "", ""])
+Write a function called lightColumn() that takes in the letter of the column from the grid, and returns an array that is the contents of that grid column. (Ex: lightColumn('C'); would return ["", "", "", "", "", "", "", "~", "", ""])
 */
 
 const GRID = [
@@ -59,4 +59,18 @@ function lightRow(row) {
 }
 
 
-console.log(lightRow(2));
+function lightColumn(column) {
+  //column is letter, convert to letter
+  var x = column.charCodeAt(0) - 65;
+  var result = [];
+  
+  //sort the grid
+  result = GRID.map(row => {
+    return row[x];
+  })
+
+  return result;
+}
+
+
+console.log(lightColumn('C'));
