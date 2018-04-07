@@ -37,10 +37,17 @@ function totalCells() {
 function lightCell(cell) {
   //subtract 65 from ascii code to get xCoordinate
   var x = cell.charCodeAt(0) - 65;
-  var y = Number(cell[1]) - 1;
-  console.log(`x: ${x}, charCode: ${cell.charCodeAt(0)} y: ${y}`);
+  var y = Number(cell.substr(1)) - 1;
+  var cellValid = true;
 
-  return `${GRID[y][x]}`;
+  //count cell length - 1 (index based), flag as false if cell invalid
+  if (y > GRID.length - 1 || x > GRID[y].length - 1) {
+    cellValid = false;
+  }
+
+  console.log(`cellValid: ${cellValid} x: ${x}, charCode: ${cell.charCodeAt(0)} y: ${y}`);
+
+  return cellValid ? `${GRID[y][x]}` : false;
 }
 
 
@@ -73,4 +80,4 @@ function lightColumn(column) {
 }
 
 
-console.log(lightColumn('C'));
+console.log(lightCell('Z3'));
