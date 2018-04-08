@@ -1,8 +1,8 @@
 /*
-Challenge 7
-Now that you can return the contents of the cells of a row, we also need to be able to return the cells of a column.
+Challenge 9
+The other lighthouse operators are impressed that you figured out how to find rocks and currents, but they also need a method to identify safe cells. A cell is safe if there is no rock or strong current in that cell.
 
-Write a function called lightColumn() that takes in the letter of the column from the grid, and returns an array that is the contents of that grid column. (Ex: lightColumn('C'); would return ["", "", "", "", "", "", "", "~", "", ""])
+Write a function called isSafe() which will take in a coordinate in the form of 'H2' and return a true or a false boolean. The isSafe() function should check to see if there is a rock or current or not in that cell. (Example: isSafe('D7'); would return true)
 */
 
 const GRID = [
@@ -80,4 +80,9 @@ function lightColumn(column) {
 }
 
 
-console.log(lightCell('Z3'));
+function isSafe(cell) {
+  // return lightCell(cell) === '';
+  return !(isCurrent(cell) || isRock(cell));
+}
+
+console.log(isSafe('D1'));
