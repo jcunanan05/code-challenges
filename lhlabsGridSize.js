@@ -1,8 +1,8 @@
 /*
-Challenge 9
-The other lighthouse operators are impressed that you figured out how to find rocks and currents, but they also need a method to identify safe cells. A cell is safe if there is no rock or strong current in that cell.
+Challenge 10
+Environment Canada has called and wants a report sent to them of all the rocks in your grid, for use in their latest map.
 
-Write a function called isSafe() which will take in a coordinate in the form of 'H2' and return a true or a false boolean. The isSafe() function should check to see if there is a rock or current or not in that cell. (Example: isSafe('D7'); would return true)
+Write a function called allRocks() which when called will return an array of the coordinates of all the rocks in your grid. (Example: allRocks() should return ["D1", "E3", "F3", "E4", "F4", "B8", "H8", "B9", "B10"])
 */
 
 const GRID = [
@@ -85,4 +85,47 @@ function isSafe(cell) {
   return !(isCurrent(cell) || isRock(cell));
 }
 
-console.log(isSafe('D1'));
+
+function allRocks() {
+  //return all grid with rock
+  var allCells = [];
+
+  GRID.forEach((columns, columnIndex) => {
+    columns.forEach((row, rowIndex) => {
+      if(row === '^') {
+        var rowLetter = String.fromCharCode((rowIndex + 65));
+        allCells.push(`${rowLetter}${columnIndex + 1}`);
+      }
+    });
+
+    var ewan = columns.findIndex((row) => {
+      return row === '^';
+    });
+
+    console.log(ewan);
+  });
+
+  return allCells;
+}
+
+
+function allRocks2() {
+  var cells = GRID.reduce((rockyCells, rows, columnIndex) => {
+    //go through each row
+    rows.forEach((row, rowIndex) => {
+      if(row === '^') {
+        //convert to letter
+        var rowLetter = String.fromCharCode((rowIndex + 65));
+        //add to 
+        rockyCells.push(`${rowLetter}${columnIndex + 1}`);
+      }
+    });
+
+    return rockyCells;
+  }, []);
+
+  return cells;
+}
+
+
+console.log(allRocks2());
