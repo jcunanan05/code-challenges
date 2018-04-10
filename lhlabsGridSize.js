@@ -110,22 +110,43 @@ function allRocks() {
 
 
 function allRocks2() {
-  var cells = GRID.reduce((rockyCells, rows, columnIndex) => {
-    //go through each row
+  var cells = []; 
+  //go through each row
+  GRID.reduce((rockyCells, rows, columnIndex) => {
     rows.forEach((row, rowIndex) => {
       if(row === '^') {
         //convert to letter
         var rowLetter = String.fromCharCode((rowIndex + 65));
-        //add to 
+        //add to array as `A1`
         rockyCells.push(`${rowLetter}${columnIndex + 1}`);
       }
     });
 
     return rockyCells;
-  }, []);
+  }, cells);
 
   return cells;
 }
 
 
-console.log(allRocks2());
+function allCurrents() {
+  var cells = []; 
+  //go through each row
+  GRID.reduce((currentsCells, rows, columnIndex) => {
+    rows.forEach((row, rowIndex) => {
+      if(row === '~') {
+        //convert to letter
+        var rowLetter = String.fromCharCode((rowIndex + 65));
+        //add to array as `A1`
+        currentsCells.push(`${rowLetter}${columnIndex + 1}`);
+      }
+    });
+
+    return currentsCells;
+  }, cells);
+
+  return cells;
+}
+
+
+console.log(allCurrents());
