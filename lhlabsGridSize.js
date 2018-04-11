@@ -1,8 +1,6 @@
 /*
-Challenge 10
-Environment Canada has called and wants a report sent to them of all the rocks in your grid, for use in their latest map.
-
-Write a function called allRocks() which when called will return an array of the coordinates of all the rocks in your grid. (Example: allRocks() should return ["D1", "E3", "F3", "E4", "F4", "B8", "H8", "B9", "B10"])
+Challenge 12
+Here is an opportunity to prove how powerful your lighthouse-powering skills are! Look at the code for Challenge #10, and write a function called firstRock() which will return the coordinates of the first rock in your grid.
 */
 
 const GRID = [
@@ -149,4 +147,9 @@ function allCurrents() {
 }
 
 
-console.log(allCurrents());
+function firstRock() {
+  return allRocks2()[0];
+}
+
+
+console.log(firstRock());
