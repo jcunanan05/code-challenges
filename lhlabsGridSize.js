@@ -1,6 +1,6 @@
 /*
-Challenge 12
-Here is an opportunity to prove how powerful your lighthouse-powering skills are! Look at the code for Challenge #10, and write a function called firstRock() which will return the coordinates of the first rock in your grid.
+Challenge 13
+That was outstanding! Now do the same thing with firstCurrent(). Don't reinvent the wheel here. Re-use existing code from Challenge #11. This is one of the most important skills you can build as a coder...er, uh, I mean lighthouse operator.
 */
 
 const GRID = [
@@ -152,4 +152,8 @@ function firstRock() {
 }
 
 
-console.log(firstRock());
+function firstCurrent() {
+  return allCurrents()[0];
+}
+
+console.log(firstCurrent());
