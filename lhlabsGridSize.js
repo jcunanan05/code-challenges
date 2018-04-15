@@ -1,8 +1,13 @@
 /*
-Challenge 14
-Ship captains are really starting to rely on you to plot their routes through your area. Your name is being sung in pubs and taverns up and down the coast. And this time, it's for the right reasons! The ship captains are starting to be curious about some of the cells in your grid, and what they want is to know if a cell is dangerous. They know if ones are safe, but sometimes, they are willing to accept a bit of danger so that they can get a faster delivery time.
+Challenge 15
+HELP! A ship is in trouble and is firing off a distress beacon, with their coordinates. You need to look at all the cells around the ship and decide which cell is the best one for them to go to.
 
-A cell is considered dangerous if there is a rock or a strong current in it, OR in the cells immediately above, below, left, or right of it. Write a function called isDangerous() that will take a cell in the format 'G7' and return a true or a false value. (Example: isDangerous('E4') would return true, because there is a rock there. Similarly, isDangerous('B9') would return true, because there are rocks and currents AROUND the cell. However, isDangerous('I6') would return false because it is open water.)
+Rules:
+
+    Target cell should not be dangerous.
+    Target cell should be 1 cell away in any direction.
+
+Write a function called distressBeacon() that takes a coordinate in the format 'H2' and returns a different coordinate in the same format. (Example: distressBeacon('E8') should return 'F7'.)
 */
 
 const GRID = [
@@ -45,7 +50,7 @@ function lightCell(cell) {
     cellValid = false;
   }
 
-  console.log(`cellValid: ${cellValid} x: ${x}, charCode: ${cell.charCodeAt(0)} y: ${y}`);
+  // console.log(`cellValid: ${cellValid} x: ${x}, charCode: ${cell.charCodeAt(0)} y: ${y}`);
 
   return cellValid ? `${GRID[y][x]}` : false;
 }
@@ -166,13 +171,39 @@ function isDangerous(cell) {
   var cellX = cell[0];
   var cellY = Number(cell.substr(1));
 
-  // get letters
+  // get letters and check if safe
   var top = ! isSafe(`${cellX}${cellY - 1}`);
   var bottom = ! isSafe(`${cellX}${cellY + 1}`);
-  var left = ! isSafe(`${String.fromCharCode(cellX.charCodeAt(0) - 1)}${cellY + 1}`);
-  var right = ! isSafe(`${String.fromCharCode(cellX.charCodeAt(0) + 1)}${cellY + 1}`);
+  var left = ! isSafe(`${String.fromCharCode(cellX.charCodeAt(0) - 1)}${cellY}`);
+  var right = ! isSafe(`${String.fromCharCode(cellX.charCodeAt(0) + 1)}${cellY}`);
+
+  // console.log(`cell: ${cell} top: ${cellX}${cellY - 1} bottom: ${cellX}${cellY + 1}  left: ${String.fromCharCode(cellX.charCodeAt(0) - 1)}${cellY + 1}  right: ${String.fromCharCode(cellX.charCodeAt(0) + 1)}${cellY + 1} dangerous?: ${top || bottom || left || right}`);
 
   return top || bottom || left || right;
 }
 
-console.log(isDangerous('A1'));
+
+function distressBeacon(cell) {
+  //break cell to x y
+  var cellX = cell.charCodeAt(0);
+  var cellY = Number(cell.substr(1));
+  var safeCells = [];
+
+  // var x = A - 1 ; A - 1 <= A + 1 ; x++ increment x from 
+  for (var x = cellX - 1; x <= cellX + 1; x++) {
+    for (var y = cellY - 1; y <= cellY + 1; y++) {
+      var targetCell = `${String.fromCharCode(x)}${y}`; //Letter format
+      //elimnate the original cell from safeCells
+      // console.log(`cell:${targetCell} valid: ${typeof lightCell(targetCell) === 'string' ? true : false}`);
+      if(targetCell !== cell && !isDangerous(targetCell) && typeof lightCell(targetCell) === 'string') {
+        console.log(`cell:${targetCell} safe: ${!isDangerous(targetCell)}`);
+        safeCells.push(targetCell);
+      }
+    }
+  }
+
+  return safeCells.length === 0 ? '' : safeCells.length > 1 ? safeCells : safeCells[0];
+}
+
+
+console.log(distressBeacon('E8'));
