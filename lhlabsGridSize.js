@@ -170,40 +170,26 @@ function isDangerous(cell) {
   // check if grid exist
   var cellX = cell[0];
   var cellY = Number(cell.substr(1));
+  var dangers = allRocks2().join(allCurrents());
+  var cells = [];
+  var result = false;
 
   // get letters and check if safe
-  var top = ! isSafe(`${cellX}${cellY - 1}`);
-  var bottom = ! isSafe(`${cellX}${cellY + 1}`);
-  var left = ! isSafe(`${String.fromCharCode(cellX.charCodeAt(0) - 1)}${cellY}`);
-  var right = ! isSafe(`${String.fromCharCode(cellX.charCodeAt(0) + 1)}${cellY}`);
+  for (var i = -1; i <= 1; i++) {
+    var yOffset = `${cellX}${cellY + i}`;
+    var xOffset = `${String.fromCharCode(cellX.charCodeAt(0) + i)}${cellY}`;
 
-  // console.log(`cell: ${cell} top: ${cellX}${cellY - 1} bottom: ${cellX}${cellY + 1}  left: ${String.fromCharCode(cellX.charCodeAt(0) - 1)}${cellY + 1}  right: ${String.fromCharCode(cellX.charCodeAt(0) + 1)}${cellY + 1} dangerous?: ${top || bottom || left || right}`);
+    if (xOffset !== cell && yOffset !== cell) {
+      result = result || dangers.includes(xOffset) || dangers.includes(yOffset);
+    }
+  }
 
-  return top || bottom || left || right;
+  return result;
 }
 
 
 function distressBeacon(cell) {
-  //break cell to x y
-  var cellX = cell.charCodeAt(0);
-  var cellY = Number(cell.substr(1));
-  var safeCells = [];
 
-  // var x = A - 1 ; A - 1 <= A + 1 ; x++ increment x from 
-  for (var x = cellX - 1; x <= cellX + 1; x++) {
-    for (var y = cellY - 1; y <= cellY + 1; y++) {
-      var targetCell = `${String.fromCharCode(x)}${y}`; //Letter format
-      //elimnate the original cell from safeCells
-      // console.log(`cell:${targetCell} valid: ${typeof lightCell(targetCell) === 'string' ? true : false}`);
-      if(targetCell !== cell && !isDangerous(targetCell) && typeof lightCell(targetCell) === 'string') {
-        console.log(`cell:${targetCell} safe: ${!isDangerous(targetCell)}`);
-        safeCells.push(targetCell);
-      }
-    }
-  }
-
-  return safeCells.length === 0 ? '' : safeCells.length > 1 ? safeCells : safeCells[0];
 }
 
-
-console.log(distressBeacon('E8'));
+console.log(isDangerous('E8'));
