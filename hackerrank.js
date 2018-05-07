@@ -1,50 +1,16 @@
-'use strict';
+//compare alice vs bob's numbers and score them
+function solve(a0, a1, a2, b0, b1, b2) {
+  var alice = Array.from(arguments).splice(0,3);
+  var bob = Array.from(arguments).splice(3,5);
+  var aliceScore = 0;
+  var bobScore = 0;
 
-const fs = require('fs');
+  alice.forEach((a, i) => {
+    if(a > bob[i]) aliceScore += 1;
+    else if(a < bob[i]) bobScore += 1;
+  });
 
-process.stdin.resume();
-process.stdin.setEncoding('utf-8');
-
-let inputString = '';
-let currentLine = 0;
-
-process.stdin.on('data', inputStdin => {
-    inputString += inputStdin;
-});
-
-process.stdin.on('end', _ => {
-    inputString = inputString.trim().split('\n').map(str => str.trim());
-
-    main();
-});
-
-function readLine() {
-    return inputString[currentLine++];
+  return [aliceScore, bobScore];
 }
 
-/*
- * Complete the simpleArraySum function below.
- */
-function simpleArraySum(ar) {
-    /*
-     * Write your code here.
-     */
-    
-    return ar.reduce(function(a, b) {
-        return a + b;
-    });
-}
-
-function main() {
-    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
-
-    const arCount = parseInt(readLine(), 10);
-
-    const ar = readLine().split(' ').map(arTemp => parseInt(arTemp, 10));
-
-    let result = simpleArraySum(ar);
-
-    ws.write(result + "\n");
-
-    ws.end();
-}
+console.log(solve(5, 6, 7, 3, 6, 10));
