@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Responsive Images Exercise</title>
+
+  <style rel="stylesheet">
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Responsive Image exercise</h1>
+
+  <!-- Responsive exercise from MDN webdocs: url('https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images') -->
+
+  <picture>
+    <source type="image/jpeg" media="(max-width: 480px)" srcset="https://www.flemishmasters.com/files/cache/square/files/landscape-c-milo-profi-copyright-always-obligatory-59fc21a4bf1fd.jpg">
+    <source type="image/jpeg" media="(max-width: 719px)" srcset="https://www.easy-oil-painting-techniques.org/images/bath-county-storm-painting-800.jpg">
+    <source type="image/jpeg" media="(min-width: 720px)" srcset="https://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/12/2016/01/16578.jpg">
+    <img src="https://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/12/2016/01/16578.jpg" alt="Picture of nature landscape">
+  </picture>
+</body>
+
+</html>
