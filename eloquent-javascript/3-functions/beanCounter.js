@@ -8,8 +8,9 @@
 
  // Your code here.
 function countChar(stringValue, character) {
+  //find and match character using regex
   var regexCharacter = new RegExp(character, 'g');
-  var result = stringValue.match(regexCharacter) || [];
+  var result = stringValue.match(regexCharacter) || []; //return an empty array if null
 
   return result.length;
 }
