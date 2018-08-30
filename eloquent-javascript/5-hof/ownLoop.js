@@ -7,8 +7,11 @@
 
 // Your code here.
 
-function loop(value, test, process, body) {
-  // check if the value pass the test
+// Your code here.
+function loop(val, test, process, body) {
+  for(let value = val; test(value); value = process(value)){
+  	body(value);
+  }
 }
 
 loop(3, n => n > 0, n => n - 1, console.log);
