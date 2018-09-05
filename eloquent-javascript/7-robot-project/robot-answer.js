@@ -8,8 +8,14 @@ const roads = [
   "Marketplace-Town Hall",       "Shop-Town Hall"
 ];
 const roadGraph = buildGraph(roads);
+// this is the map on how to go to each house
+const mailRoute = [
+  "Alice's House", "Cabin", "Alice's House", "Bob's House",
+  "Town Hall", "Daria's House", "Ernie's House",
+  "Grete's House", "Shop", "Grete's House", "Farm",
+  "Marketplace", "Post Office"
+];
 // Build graph is a function that we convert the roads to a graph, to determine in a given place, which places we can visit from there
-
 function buildGraph(edges) {
   let graph = Object.create(null); // to prevent fallback e.g. graph.hasOwnProperty('toString') might return true.
 
@@ -61,15 +67,88 @@ class VillageState {
   }
 }
 
+// Accept a village state, 
+// basically deliver the parcels
 function runRobot(state, robot, memory) {
   for (let turn = 0;; turn++) {
     if (state.parcels.length == 0) {
       console.log(`Done in ${turn} turns`);
       break;
     }
+
     let action = robot(state, memory);
     state = state.move(action.direction);
     memory = action.memory;
+
     console.log(`Moved to ${action.direction}`);
   }
+}
+
+// Choose Random index on the array
+function randomPick(array) {
+  let choice = Math.floor(Math.random() * array.length);
+  return array[choice];
+}
+
+// Random pick a place to go based on the VillageState's place.
+function randomRobot(state) {
+  return {direction: randomPick(roadGraph[state.place])};
+}
+
+// Static function - means can be activated without instantiating
+// Pick any random package (5 default). But the package's address isn't the same as itself
+// Make a random VillageState with random parcels
+VillageState.random = function(parcelCount = 5) {
+  let parcels = [];
+
+  for (let i = 0; i < parcelCount; i++) {
+    let address = randomPick(Object.keys(roadGraph));
+    let place;
+
+    do {
+      place = randomPick(Object.keys(roadGraph));
+    } while (place == address);
+
+    parcels.push({place, address});
+  }
+
+  return new VillageState("Post Office", parcels);
+};
+
+// basically return direction and memory. Also remove the most recent memory because it's already visited
+function routeRobot(state, memory) {
+  if (memory.length == 0) {
+    memory = mailRoute;
+  }
+  console.log(memory);
+  return {direction: memory[0], memory: memory.slice(1)};
+}
+
+
+function findRoute(graph, from, to) {
+  let work = [{at: from, route: []}];
+
+  for (let i = 0; i < work.length; i++) {
+    let {at, route} = work[i];
+
+    for (let place of graph[at]) {
+      if (place == to) return route.concat(place);
+      
+      if (!work.some(w => w.at == place)) {
+        work.push({at: place, route: route.concat(place)});
+      }
+    }
+  }
+}
+
+function goalOrientedRobot({place, parcels}, route) {
+  if (route.length == 0) {
+    let parcel = parcels[0];
+    if (parcel.place != place) {
+      route = findRoute(roadGraph, place, parcel.place);
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+  }
+  return {direction: route[0], memory: route.slice(1)};
 }
