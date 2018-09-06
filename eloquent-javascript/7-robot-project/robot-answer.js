@@ -44,7 +44,9 @@ function buildGraph(edges) {
   return graph;
 }
 
-
+// parcels looks like this:
+// [{place: 'Alice \'s house', address: 'Post Office'}, {...}]
+// place is where the robot previously moved or picked a parcel. while address is where will it needs to be delivered.
 class VillageState {
   constructor(place, parcels) {
     this.place = place;
@@ -52,70 +54,103 @@ class VillageState {
   }
 
   move(destination) {
-    // the current place has a list of accessible roads, if it is accessible, we will remove the parcel and return a new Village state without that parcel.
+    // get the destination e.g. 'Town Hall'
+    // check roadGraph if that destination can be reached by the current Village State's place.
     if (!roadGraph[this.place].includes(destination)) {
+      // just return current state if it's invalid.
       return this;
     } else {
+      // loop over the parcels.
+      // rewrite their current place as the destination.
+      // except the one with the same place as the VillageState
+      
+      // as soon as moving (rewriting place: ), filter the packages
+      // remove the packages with place == address
       let parcels = this.parcels.map(p => {
         if (p.place != this.place) return p;
 
         return {place: destination, address: p.address};
       }).filter(p => p.place != p.address);
 
+      // return new village state
       return new VillageState(destination, parcels);
     }
   }
 }
 
-// Accept a village state, 
-// basically deliver the parcels
+// state is the village state,
+// robot is the delivery boy. (has its own route delivery functions)
+// memory is optional parameter (depends on the robot.)
 function runRobot(state, robot, memory) {
+  // loop through the delivery.
+  // break the loop after parcel is 0
   for (let turn = 0;; turn++) {
     if (state.parcels.length == 0) {
       console.log(`Done in ${turn} turns`);
       break;
     }
 
-    let action = robot(state, memory);
-    state = state.move(action.direction);
-    memory = action.memory;
+    let action = robot(state, memory); // returns a {direction: ''}
+    state = state.move(action.direction); // VillageState.move
+    memory = action.memory; // overwrite the memory 
 
     console.log(`Moved to ${action.direction}`);
   }
 }
 
-// Choose Random index on the array
+// general random element function
 function randomPick(array) {
   let choice = Math.floor(Math.random() * array.length);
   return array[choice];
 }
 
-// Random pick a place to go based on the VillageState's place.
 function randomRobot(state) {
+  // Get a village state,
+  // randomly pick a direction based on the roads accessible by the village state
   return {direction: randomPick(roadGraph[state.place])};
 }
+
+// const newVillageState = new VillageState(randomPick(Object.keys(roadGraph)), []);
+
+// console.log(randomRobot(newVillageState));
 
 // Static function - means can be activated without instantiating
 // Pick any random package (5 default). But the package's address isn't the same as itself
 // Make a random VillageState with random parcels
 VillageState.random = function(parcelCount = 5) {
   let parcels = [];
-
+  
+  console.log(roadGraph);
+  
   for (let i = 0; i < parcelCount; i++) {
-    let address = randomPick(Object.keys(roadGraph));
+    let address = randomPick(Object.keys(roadGraph)); // get all the Keys only from the graph. And randomly pick from them
     let place;
-
+    
+    console.log(`random address: ${address}`);
+    
     do {
-      place = randomPick(Object.keys(roadGraph));
-    } while (place == address);
-
-    parcels.push({place, address});
+      place = randomPick(Object.keys(roadGraph)); 
+    } while (place == address); // dont pick same place and address
+    
+    console.log(`random place: ${place}`);
+    
+    parcels.push({place, address}); // parcel object design
   }
-
+  
+  console.log(parcels);
+  
   return new VillageState("Post Office", parcels);
 };
 
-// basically return direction and memory. Also remove the most recent memory because it's already visited
+// const newVillageState = new VillageState(randomPick(Object.keys(roadGraph)), []);
+
+// console.log(randomRobot(newVillageState));
+
+
+// memory is just an array.
+// state is the Village state
+// mailRoute is the fixed route
+// routeRobot will go just through all routes 
 function routeRobot(state, memory) {
   if (memory.length == 0) {
     memory = mailRoute;
