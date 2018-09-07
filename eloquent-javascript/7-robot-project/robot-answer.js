@@ -96,6 +96,7 @@ function runRobot(state, robot, memory) {
 
     console.log(`Moved to ${action.direction}`);
   }
+  
 }
 
 // general random element function
