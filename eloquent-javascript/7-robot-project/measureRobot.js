@@ -13,7 +13,7 @@ function runRobot(state, robot, memory) {
   // break the loop after parcel is 0
   for (;; turn++) {
     if (state.parcels.length == 0) {
-      console.log(`Done in ${turn} turns`);
+      // console.log(`Done in ${turn} turns`);
       break;
     }
 
@@ -26,16 +26,20 @@ function runRobot(state, robot, memory) {
 }
 
 function compareRobots(robot1, memory1, robot2, memory2) {
-  const sameVillageState = VillageState.random(100);
+  const robot1Turns = [];
+  const robot2Turns = [];
+  const tasks = 100;
   
   // run robot and get number of turns
-  const robot1Turns = runRobot(sameVillageState, robot1, memory1);
-  const robot2Turns = runRobot(sameVillageState, robot2, memory2);
+  for(let counter = 0; counter < tasks; counter++) {
+    let sameVillageState = VillageState.random();
+    
+    robot1Turns.push(runRobot(sameVillageState, robot1, memory1));
+    robot2Turns.push(runRobot(sameVillageState, robot2, memory2));
+  }
   
   return {
-  	robot1: robot1Turns,
-    robot2: robot2Turns
+  	robot1: robot1Turns.reduce((prevTurn, turn) => turn + prevTurn, 0) / tasks,
+    robot2: robot2Turns.reduce((prevTurn, turn) => turn + prevTurn, 0) / tasks
   };
 }
-
-compareRobots(routeRobot, [], goalOrientedRobot, []);
