@@ -4,3 +4,8 @@ const GRID = require("./GRID");
 function countRows() {
   return GRID.length;
 }
+
+// Day 2
+function countColumns() {
+  return GRID[0].length;
+}
