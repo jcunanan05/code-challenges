@@ -9,3 +9,8 @@ function countRows() {
 function countColumns() {
   return GRID[0].length;
 }
+
+// Day 3
+function gridSize() {
+  return `${countColumns()} x ${countRows()}`;
+}
