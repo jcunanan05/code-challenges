@@ -14,3 +14,8 @@ function countColumns() {
 function gridSize() {
   return `${countColumns()} x ${countRows()}`;
 }
+
+// Day 4
+function totalCells() {
+  return countColumns() * countRows();
+}
