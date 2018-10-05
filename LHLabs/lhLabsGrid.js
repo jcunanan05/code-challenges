@@ -22,6 +22,6 @@ function totalCells() {
 
 // Day 5
 function convertColumn(coordinates) {
-  const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return columns.indexOf(coordinates[0]);
 }
