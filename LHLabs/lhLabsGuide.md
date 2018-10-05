@@ -17,3 +17,11 @@ Write a function called gridSize() that will tell you the size of your grid in t
 ## Challenge #4
 
 Write a new function called totalCells() which will return the total number of cells in your grid. For this grid, it should return 100, but again make sure that is a calculated value and not just a number you type in for your function to return. We want to make all the other lighthouse operators jealous.
+
+## Challenge #5
+
+Since our GRID is written in coordinates like A3 or D8, we need code that is going to be able to convert those coordinates to the numbers we need to fetch data out of the GRID array(s). All of the lighthouse operators have reported in and we know that their areas never go above Z.
+
+Let's build a function called convertColumn() which, when given the coordinate as an argument, will return the number of the column.
+
+For example, calling convertColumn('C4') should return 2 as the 'C' column is the third column, and since JavaScript arrays start at 0, that would make 2 the third column.

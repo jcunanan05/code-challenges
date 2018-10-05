@@ -19,3 +19,9 @@ function gridSize() {
 function totalCells() {
   return countColumns() * countRows();
 }
+
+// Day 5
+function convertColumn(coordinates) {
+  const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  return columns.indexOf(coordinates[0]);
+}
