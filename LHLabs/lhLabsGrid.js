@@ -25,3 +25,10 @@ function convertColumn(coordinates) {
   const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return columns.indexOf(coordinates[0]);
 }
+
+// Day 6
+function lightCell(coordinates) {
+  const row = Number(coordinates.slice(1) - 1);
+  const column = convertColumn(coordinates);
+  return GRID[row][column];
+}

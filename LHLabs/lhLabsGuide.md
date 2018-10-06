@@ -25,3 +25,9 @@ Since our GRID is written in coordinates like A3 or D8, we need code that is goi
 Let's build a function called convertColumn() which, when given the coordinate as an argument, will return the number of the column.
 
 For example, calling convertColumn('C4') should return 2 as the 'C' column is the third column, and since JavaScript arrays start at 0, that would make 2 the third column.
+
+## Challenge #6
+
+Okay, let's get our lighthouse actually doing some work! As the lighthouse keeper, sometimes you'll need to shine the light directly on a particular cell in the grid, to alert passing ships to a danger there.
+
+Your job is to write a function called lightCell() that takes in the coordinates in the form of 'A3' or 'J9' and returns the contents of that specific cell. (Ex: lightCell('B4'); would return "")
