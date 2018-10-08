@@ -32,3 +32,12 @@ function lightCell(coordinates) {
   const column = convertColumn(coordinates);
   return GRID[row][column];
 }
+
+// Day 7
+function isRock(coordinates) {
+  try {
+    return lightCell(coordinates) === "^";
+  } catch (_) {
+    return false;
+  }
+}
