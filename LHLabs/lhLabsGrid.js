@@ -34,10 +34,20 @@ function lightCell(coordinates) {
 }
 
 // Day 7
-function isRock(coordinates) {
+// make HOF for content checking
+function isA(thing, coordinates) {
   try {
-    return lightCell(coordinates) === "^";
+    return lightCell(coordinates) === thing;
   } catch (_) {
     return false;
   }
+}
+
+function isRock(coordinates) {
+  return isA("^", coordinates);
+}
+
+// Day 8
+function isCurrent(coordinates) {
+  return isA("~", coordinates);
 }
