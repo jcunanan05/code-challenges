@@ -34,7 +34,6 @@ function lightCell(coordinates) {
 }
 
 // Day 7
-// make HOF for content checking
 function isA(thing, coordinates) {
   try {
     return lightCell(coordinates) === thing;
