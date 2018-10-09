@@ -50,3 +50,8 @@ function isRock(coordinates) {
 function isCurrent(coordinates) {
   return isA("~", coordinates);
 }
+
+// Day 9
+function isShip(coordinates) {
+  return isA("v", coordinates);
+}
