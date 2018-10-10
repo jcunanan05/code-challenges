@@ -55,3 +55,8 @@ function isCurrent(coordinates) {
 function isShip(coordinates) {
   return isA("v", coordinates);
 }
+
+// Day 10
+function lightRow(row) {
+  return GRID[row - 1];
+}
