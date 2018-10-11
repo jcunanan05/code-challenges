@@ -60,3 +60,8 @@ function isShip(coordinates) {
 function lightRow(row) {
   return GRID[row - 1];
 }
+
+// Day 11
+function lightColumn(column) {
+  return GRID.map(row => row[convertColumn(column)]);
+}
