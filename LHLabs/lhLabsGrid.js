@@ -23,23 +23,21 @@ function totalCells() {
 // Day 5
 function convertColumn(coordinates) {
   const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  return columns.indexOf(coordinates[0]);
+  return columns.indexOf(coordinates[0].toUpperCase());
 }
 
 // Day 6
 function lightCell(coordinates) {
   const row = Number(coordinates.slice(1) - 1);
   const column = convertColumn(coordinates);
+  if (GRID[row] === undefined) return false;
+  if (GRID[row][column] === undefined) return false;
   return GRID[row][column];
 }
 
 // Day 7
 function isA(thing, coordinates) {
-  try {
-    return lightCell(coordinates) === thing;
-  } catch (_) {
-    return false;
-  }
+  return lightCell(coordinates) === thing;
 }
 
 function isRock(coordinates) {
