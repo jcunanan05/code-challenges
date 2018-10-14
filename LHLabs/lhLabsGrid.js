@@ -26,6 +26,11 @@ function convertColumn(coordinates) {
   return columns.indexOf(coordinates[0].toUpperCase());
 }
 
+function convertColumnIndex(i) {
+  const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  return columns[i];
+}
+
 // Day 6
 function lightCell(coordinates) {
   const row = Number(coordinates.slice(1) - 1);
@@ -62,4 +67,23 @@ function lightRow(row) {
 // Day 11
 function lightColumn(column) {
   return GRID.map(row => row[convertColumn(column)]);
+}
+
+// Day 13
+function getAll(thing) {
+  return GRID.reduce((store, row, rowIndex) => {
+    row.forEach((column, columnIndex) => {
+      let columnLetter = convertColumnIndex(columnIndex);
+      if (column === thing) store.push(`${columnLetter}${rowIndex + 1}`);
+    });
+    return store;
+  }, []);
+}
+
+function allRocks() {
+  return getAll("^");
+}
+
+function allCurrents() {
+  return getAll("~");
 }

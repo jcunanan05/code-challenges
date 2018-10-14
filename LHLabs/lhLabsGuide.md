@@ -61,3 +61,11 @@ Write a function named lightRow() that takes in the number of the row and return
 Now that you can return the contents of the cells of a row, we also need to be able to return the cells of a column.
 
 Write a function called lightColumn() that takes in the letter of the column from the grid, and returns an array that is the contents of that grid column. (Ex: lightColumn('C'); would return ["", "", "", "", "", "", "", "~", "", ""])
+
+## Challenge #13
+
+Environment Canada has called and wants a report sent to them of all the rocks and currents in your grid, for use in their latest map.
+
+Write a function called allRocks() which when called will return an array of the coordinates of all the rocks in your grid. (Example: allRocks() should return ['D1', 'E3', 'F3', 'E4', 'F4', 'B8', 'H8', 'B9', 'B10'])
+
+Write a function called allCurrents() which, when called, will return an array of the coordinates of all the strong currents in your grid. (Example: allCurrents() should return ['E2', 'C8', 'D8', 'D9', 'E9', 'E10', 'F10'])
