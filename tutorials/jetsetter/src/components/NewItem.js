@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
 import uniqueId from 'lodash/uniqueId';
-
+import { addItem } from '../lib/actions';
 import './NewItem.css';
 
 class NewItem extends Component {
-  state = { value: '' };
+  state = {
+    value: ''
+  };
+
+  shouldComponentUpdate(newProps, newState) {
+    return this.state.value !== newState.value;
+  }
 
   handleChange = event => {
-    this.setState({value: event.target.value});
+    const value = event.target.value;
+    this.setState({ value });
   };
 
   handleSubmit = event => {
-    const { onSubmit } = this.props;
     const { value } = this.state;
-
     event.preventDefault();
-
-    onSubmit({value, id: uniqueId(), packed: false});
-
-    this.resetValue();
-  };
-
-  resetValue() {
+    addItem(value);
     this.setState({ value: '' });
-  }
+  };
 
   render() {
     const { value } = this.state;

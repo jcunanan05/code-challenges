@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
+import { removeItem, toggleItem } from '../lib/actions';
 import './Item.css';
 
 class Item extends Component {
-  render() {
-    const { item, onToggle, onRemove } = this.props;
+  handleChange = () => {
+    toggleItem(this.props.item);
+  };
 
+  handleRemove = () => {
+    removeItem(this.props.item);
+  };
+
+  render() {
+    const { item } = this.props;
     return (
       <article className="Item">
         <label htmlFor={item.id}>
           <input
             type="checkbox"
             checked={item.packed}
-            onChange={() => onToggle(item)}
+            onChange={this.handleChange}
             id={item.id}
           />
           {item.value}
         </label>
-        <button className="Item-remove" onClick={() => onRemove(item.id)}>
+        <button className="Item-remove" onClick={this.handleRemove}>
           Remove
         </button>
       </article>

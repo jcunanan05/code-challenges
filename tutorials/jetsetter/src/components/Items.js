@@ -4,7 +4,7 @@ import Filter from './Filter';
 
 class Items extends Component {
   state = {
-    searchTerm: ''
+    searchTerm: '',
   };
 
   updateSearchTerm = searchTerm => {
@@ -12,7 +12,7 @@ class Items extends Component {
   };
 
   render() {
-    const { title, items, onRemoveItem, onToggle } = this.props;
+    const { title, items, onCheckOff, onRemove } = this.props;
     const { searchTerm } = this.state;
     return (
       <section className="Items">
@@ -22,14 +22,13 @@ class Items extends Component {
         <Filter searchTerm={searchTerm} onChange={this.updateSearchTerm} />
         {items
           .filter(item =>
-            // Hmm… this needs some work.
             item.value.toLowerCase().includes(searchTerm.toLowerCase()),
           )
           .map(item => (
             <Item
               key={item.id}
-              onToggle={() => {onToggle(item)}}
-              onRemove={() => {onRemoveItem(item.id)}}
+              onCheckOff={() => onCheckOff(item)}
+              onRemove={() => onRemove(item)}
               item={item}
             />
           ))}
