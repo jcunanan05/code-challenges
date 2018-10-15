@@ -1,4 +1,4 @@
-const GRID = require("./GRID");
+const GRID = require('./GRID');
 
 // Day 1
 function countRows() {
@@ -22,12 +22,12 @@ function totalCells() {
 
 // Day 5
 function convertColumn(coordinates) {
-  const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const columns = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   return columns.indexOf(coordinates[0].toUpperCase());
 }
 
 function convertColumnIndex(i) {
-  const columns = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const columns = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   return columns[i];
 }
 
@@ -46,17 +46,17 @@ function isA(thing, coordinates) {
 }
 
 function isRock(coordinates) {
-  return isA("^", coordinates);
+  return isA('^', coordinates);
 }
 
 // Day 8
 function isCurrent(coordinates) {
-  return isA("~", coordinates);
+  return isA('~', coordinates);
 }
 
 // Day 9
 function isShip(coordinates) {
-  return isA("v", coordinates);
+  return isA('v', coordinates);
 }
 
 // Day 10
@@ -81,9 +81,13 @@ function getAll(thing) {
 }
 
 function allRocks() {
-  return getAll("^");
+  return getAll('^');
 }
 
 function allCurrents() {
-  return getAll("~");
+  return getAll('~');
+}
+
+function allShips() {
+  return getAll('v');
 }
