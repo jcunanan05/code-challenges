@@ -91,3 +91,7 @@ function allCurrents() {
 function allShips() {
   return getAll('v');
 }
+
+function firstRock() {
+  return allRocks()[0];
+}
