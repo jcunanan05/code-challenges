@@ -26,11 +26,6 @@ function convertColumn(coordinates) {
   return columns.indexOf(coordinates[0].toUpperCase());
 }
 
-function convertColumnIndex(i) {
-  const columns = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  return columns[i];
-}
-
 // Day 6
 function lightCell(coordinates) {
   const row = Number(coordinates.slice(1) - 1);
@@ -80,6 +75,11 @@ function getAll(thing) {
   }, []);
 }
 
+function convertColumnIndex(i) {
+  const columns = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  return columns[i];
+}
+
 function allRocks() {
   return getAll('^');
 }
@@ -94,4 +94,22 @@ function allShips() {
 
 function firstRock() {
   return allRocks()[0];
+}
+
+function firstCurrent() {
+  return allCurrents()[0];
+}
+
+function shipReport() {
+  return [allShips()[0]].concat(allShips().slice(allShips().length - 1));
+}
+
+function howDangerous(coordinates) {
+  const dangerPercentage = {
+    current: 50,
+    rock: 100
+  };
+
+  if (isCurrent(coordinates)) return dangerPercentage.current;
+  if (isRock(coordinates)) return dangerPercentage.rock;
 }
