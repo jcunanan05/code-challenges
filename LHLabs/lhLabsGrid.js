@@ -107,9 +107,40 @@ function shipReport() {
 function howDangerous(coordinates) {
   const dangerPercentage = {
     current: 50,
-    rock: 100
+    rock: 100,
+    ship: 100
   };
 
   if (isCurrent(coordinates)) return dangerPercentage.current;
   if (isRock(coordinates)) return dangerPercentage.rock;
+
+  return 0;
 }
+
+// Day 19
+function percentageReport() {
+  const percentages = {
+    currents: () => (allCurrents().length / totalCells()) * 100,
+    rocks: () => (allRocks().length / totalCells()) * 100
+  };
+
+  const { rocks, currents } = percentages;
+  return [rocks().toFixed(2), currents().toFixed(2)];
+}
+
+// Day 20
+function safetyReport() {
+  let gridCopy = [];
+
+  GRID.forEach((row, rowIndex) => {
+    gridCopy.push(
+      row.map((_, columnIndex) =>
+        howDangerous(`${convertColumnIndex(columnIndex)}${rowIndex + 1}`)
+      )
+    );
+  });
+
+  return gridCopy;
+}
+
+console.log(safetyReport());
