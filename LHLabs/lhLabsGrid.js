@@ -26,6 +26,10 @@ function convertColumn(coordinates) {
   return columns.indexOf(coordinates[0].toUpperCase());
 }
 
+function convertRow(coordinates) {
+  return Number(coordinates.slice(1) - 1);
+}
+
 // Day 6
 function lightCell(coordinates) {
   const row = Number(coordinates.slice(1) - 1);
@@ -143,4 +147,16 @@ function safetyReport() {
   return gridCopy;
 }
 
-console.log(safetyReport());
+// Day 21
+function calcDistance(pointA, pointB) {
+  const pointASquared = Math.pow(
+    convertRow(pointA) - (convertColumn(pointA) + 1),
+    2
+  );
+  const pointBSquared = Math.pow(
+    convertRow(pointB) - (convertColumn(pointB) + 1),
+    2
+  );
+
+  return Math.sqrt(pointASquared + pointBSquared).toFixed(2);
+}
