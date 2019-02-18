@@ -1,0 +1,24 @@
+{
+  "name": "code-challenges",
+  "version": "1.0.0",
+  "description": "These challenges are my coding/algorithm practice. I try to make a record or copy of them because sometimes in fCC my solutions are erased. But these challenges may come from different sources than fCC.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run test",
+    "test": "jest",
+    "watch": "npm run test --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcunanan05/code-challenges.git"
+  },
+  "author": "Jonathan Cunanan <j_cunanan05@yahoo.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcunanan05/code-challenges/issues"
+  },
+  "homepage": "https://github.com/jcunanan05/code-challenges#readme",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}
