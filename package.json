@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run test",
     "test": "jest",
-    "watch": "npm run test --watch"
+    "watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
