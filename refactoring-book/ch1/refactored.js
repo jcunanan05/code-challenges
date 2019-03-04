@@ -46,4 +46,4 @@ function statement(invoice, plays) {
   return result;
 }
 
-export default statement;
+module.exports = statement;
