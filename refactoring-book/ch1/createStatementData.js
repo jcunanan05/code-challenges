@@ -8,11 +8,7 @@ class PerformanceCalculator {
     let result = 0;
     switch (this.play.type) {
       case 'tragedy':
-        result = 40000;
-        if (this.performance.audience > 30) {
-          result += 1000 * (this.performance.audience - 30);
-        }
-        break;
+        throw 'badthing';
       case 'comedy':
         result = 30000;
         if (this.performance.audience > 20) {
@@ -36,6 +32,35 @@ class PerformanceCalculator {
   }
 }
 
+class TragedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+}
+class ComedyCalculator extends PerformanceCalculator {
+  get amount() {
+    let result = 0;
+    switch (this.play.type) {
+      case 'tragedy':
+        throw 'bad thing';
+      case 'comedy':
+        result = 30000;
+        if (this.performance.audience > 20) {
+          result += 10000 + 500 * (this.performance.audience - 20);
+        }
+        result += 300 * this.performance.audience;
+        break;
+      default:
+        throw new Error(`unknown type: ${this.play.type}`);
+    }
+    return result;
+  }
+}
+
 function createStatementData(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
@@ -45,7 +70,7 @@ function createStatementData(invoice, plays) {
   return statementData;
 
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(
+    const calculator = createPerformanceCalculator(
       aPerformance,
       playFor(aPerformance)
     );
@@ -54,6 +79,17 @@ function createStatementData(invoice, plays) {
     result.amount = calculator.amount;
     result.volumeCredits = calculator.volumeCredits;
     return result;
+  }
+
+  function createPerformanceCalculator(aPerformance, aPlay) {
+    switch (aPlay.type) {
+      case 'tragedy':
+        return new TragedyCalculator(aPerformance, aPlay);
+      case 'comedy':
+        return new ComedyCalculator(aPerformance, aPlay);
+      default:
+        throw new Error(`unknown type: ${aPlay.type}`);
+    }
   }
 
   function playFor(aPerformance) {
