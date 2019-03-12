@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/jcunanan05/code-challenges#readme",
   "devDependencies": {
-    "jest": "^24.1.0"
+    "jest": "^24.4.0"
   }
 }
